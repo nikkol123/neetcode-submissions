@@ -1,0 +1,25 @@
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        l, r = 0, len(nums) - 1
+        while l < r:
+            mid = (l + r) // 2
+            if nums[mid] > nums[r]:
+                l = mid + 1
+            else:
+                r = mid
+
+        def binarySearch(left, right):
+            while left <= right:
+                mid = (left + right) // 2
+                if nums[mid] < target:
+                    left = mid +1
+                elif nums[mid] > target:
+                    right = mid -1
+                else:
+                    return mid
+            return -1
+
+        if target >= nums[l] and target <= nums[len(nums)-1]:
+            return binarySearch(l, len(nums)-1)
+        else:
+            return binarySearch(0, l-1)
