@@ -9,12 +9,9 @@ class Solution:
         dummy.next = head
         correct_left = dummy
 
-        counter = 1
-
         #find the position of the node before the reversed window
-        while counter < left:
+        for _ in range(left-1):
             correct_left = correct_left.next
-            counter += 1
         
         prev = None
         cur = correct_left.next
