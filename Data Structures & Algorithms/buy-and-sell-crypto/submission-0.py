@@ -1,9 +1,9 @@
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        localMax = 0
-        buy = prices[0]
+        res = 0
+        minPrice = float("inf")
         for price in prices:
-            profit = price - buy
-            if profit > localMax: localMax = profit
-            if price < buy: buy = price
-        return localMax
+            profit = price - minPrice
+            res = max(profit, res)
+            minPrice = min(minPrice, price)
+        return res
