@@ -6,25 +6,45 @@
 
 class Solution:
     def reorderList(self, head: Optional[ListNode]) -> None:
-        nodes = []
+        length = 0
         cur = head
+
         while cur:
-            nodes.append(cur)
             cur = cur.next
+            length += 1
 
-        left, right = 1, len(nodes)-1
+        mid = (length + 1) //2
+
         cur = head
-        while left < right:
-            cur.next = nodes[right]
-            cur.next.next = nodes[left]
+        prev = None
+        last = head
+        index = 0
+        print("2")
 
-            left += 1
-            right -= 1
-            cur = cur.next.next
+        while cur:
+            temp = cur.next
 
-        if left == right:
-            cur.next = nodes[left]
-            cur = cur.next
+            if index < mid:
+                last = cur       # Last node of the first half
+            else:
+                cur.next = prev
+                prev = cur
 
-        cur.next = None
-        2-4-6-8
+            cur = temp
+            index += 1
+
+        last.next = None 
+
+        print("3")
+
+        cur1 = head
+        cur2 = prev
+        while cur2:
+            first_next = cur1.next
+            second_next = cur2.next
+
+            cur1.next = cur2
+            cur2.next = first_next
+
+            cur1 = first_next
+            cur2 = second_next
